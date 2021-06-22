@@ -1,0 +1,41 @@
+package.json == gemfile
+npx install == bundle
+rails s == npx run start
+
+Rails handles requests and responses using a Model, View, Controller pattern
+
+Views
+This is what gets sent back to the browser and displayed
+
+Routes
+Matchers for the URLs requested to be passed on to specific handlers/Controllers
+
+Controllers
+Decides how to process a requests and define a response.
+
+Models
+Database wrapper. Similar to the model in prisma.
+
+CREATING AN ABOUT PAGE
+We first go to the routes folder which is in './config/routes' to establish a route for the about page. We add: 'get "about" to:"about#index"' which is further explained in the file routes.rb
+
+We then create a controller in './app/controllers'
+The content of this about controller should include a class with respect to the filename of the controller. Filenames for the controllers follow a convention, together with its classes. In the about_controller.rb, we should have a class with the name AboutController.
+
+The contents of the views just include the body. The tags for the html and the headers are included in the './app/views/layouts/application.html.erb'. The line that contains <%= yield %> means that the the views' contents will be placed there. This is done for modularization.
+
+CSS FILES
+An existing css file is already created by rails named application.css in './app/assets/stylesheets/'
+
+For items like the navbar that will become part of every page. An example of modularizing it using render partial can be seen in './app/views/layout/application.html.erb'. We explicitly need to create the shared folder and the files inside. Partials follow a filename convention of having an underscore at the start.
+
+We use Rails helpers for anchor tags to make it easier to change names of the routes. The helpers look like this. 
+<%= link_to "About", about_path, class="nav-link" %>
+This can be seen in the render partial named _navbar.html.erb found in './app/views/shared/'
+
+To check the valid routes, we invoke the command 'rails routes' that will show all the valid routes in the web app. Use this to see the effects of renaming routes in routes.rb using 'as: '
+
+flashes are used to store data much like a hash. A hash is similar to an object in js.
+flash[:keyname] = value
+These flashes stay for Another request upon assignment.
+flash[:keyname].inspect can be used to see if these flashes have value or if it has nil.
